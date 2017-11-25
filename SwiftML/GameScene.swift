@@ -16,79 +16,33 @@ class GameScene: SKScene {
     
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
     
-    override func sceneDidLoad() {
+    
+    func generatePoints(n: Int) -> [(x:Double, y: Double)] {
+        var points:[(x:Double, y: Double)]! = []
+        for _ in 0..<n {
+            let random_x = Double(CGFloat.random(min: 0, max: 50))
+            let random_y = Double(CGFloat.random(min: 0, max: 50))
+            points.append((x: random_x, y: random_y))
+        }
+        return points
+    }
+
+    override func didMove(to view: SKView) {
+        var testplots:[Plot]! = []
+        let testplot1 = Plot(data: generatePoints(n: 10), label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
+        let testplot2 = Plot(data: generatePoints(n: 10), label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
+        let testplot3 = Plot(data: generatePoints(n: 10), label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
         
-        self.lastUpdateTime = 0
+        testplots.append(testplot1)
+        testplots.append(testplot2)
+        testplots.append(testplot3)
+        let testgraph = Graph(height: 400, width: 600, plots: testplots, squeeze: 0.8)
+        testgraph.x_label = "random x"
+        testgraph.y_label = "random y"
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
-    }
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-        self.touchDown(atPoint: event.location(in: self))
-    }
-    
-    override func mouseDragged(with event: NSEvent) {
-        self.touchMoved(toPoint: event.location(in: self))
-    }
-    
-    override func mouseUp(with event: NSEvent) {
-        self.touchUp(atPoint: event.location(in: self))
-    }
-    
-    override func keyDown(with event: NSEvent) {
-        switch event.keyCode {
-        case 0x31:
-            if let label = self.label {
-                label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-            }
-        default:
-            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
-        }
+        self.addChild(testgraph)
     }
     
     
@@ -111,3 +65,5 @@ class GameScene: SKScene {
         self.lastUpdateTime = currentTime
     }
 }
+
+

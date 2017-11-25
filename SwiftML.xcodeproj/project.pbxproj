@@ -16,6 +16,9 @@
 		A5E355551FC906AA003950E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E355531FC906AA003950E4 /* Main.storyboard */; };
 		A5E355611FC906AA003950E4 /* SwiftMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355601FC906AA003950E4 /* SwiftMLTests.swift */; };
 		A5E3556C1FC906AA003950E4 /* SwiftMLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3556B1FC906AA003950E4 /* SwiftMLUITests.swift */; };
+		A5E3557A1FC90A98003950E4 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355791FC90A98003950E4 /* Graph.swift */; };
+		A5E3557C1FC90C3F003950E4 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3557B1FC90C3F003950E4 /* Plot.swift */; };
+		A5E3557F1FC933BF003950E4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3557E1FC933BF003950E4 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		A5E355671FC906AA003950E4 /* SwiftMLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftMLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E3556B1FC906AA003950E4 /* SwiftMLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMLUITests.swift; sourceTree = "<group>"; };
 		A5E3556D1FC906AA003950E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5E355791FC90A98003950E4 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		A5E3557B1FC90C3F003950E4 /* Plot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plot.swift; sourceTree = "<group>"; };
+		A5E3557E1FC933BF003950E4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,8 @@
 				A5E355491FC906AA003950E4 /* GameScene.sks */,
 				A5E3554B1FC906AA003950E4 /* Actions.sks */,
 				A5E3554D1FC906AA003950E4 /* GameScene.swift */,
+				A5E355801FC953AE003950E4 /* Machine Learning */,
+				A5E3557D1FC90C92003950E4 /* Graphing */,
 				A5E3554F1FC906AA003950E4 /* ViewController.swift */,
 				A5E355511FC906AA003950E4 /* Assets.xcassets */,
 				A5E355531FC906AA003950E4 /* Main.storyboard */,
@@ -131,6 +139,23 @@
 				A5E3556D1FC906AA003950E4 /* Info.plist */,
 			);
 			path = SwiftMLUITests;
+			sourceTree = "<group>";
+		};
+		A5E3557D1FC90C92003950E4 /* Graphing */ = {
+			isa = PBXGroup;
+			children = (
+				A5E3557E1FC933BF003950E4 /* Extensions.swift */,
+				A5E355791FC90A98003950E4 /* Graph.swift */,
+				A5E3557B1FC90C3F003950E4 /* Plot.swift */,
+			);
+			path = Graphing;
+			sourceTree = "<group>";
+		};
+		A5E355801FC953AE003950E4 /* Machine Learning */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Machine Learning";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,8 +293,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E3557A1FC90A98003950E4 /* Graph.swift in Sources */,
+				A5E3557F1FC933BF003950E4 /* Extensions.swift in Sources */,
 				A5E355501FC906AA003950E4 /* ViewController.swift in Sources */,
 				A5E3554E1FC906AA003950E4 /* GameScene.swift in Sources */,
+				A5E3557C1FC90C3F003950E4 /* Plot.swift in Sources */,
 				A5E355481FC906AA003950E4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
