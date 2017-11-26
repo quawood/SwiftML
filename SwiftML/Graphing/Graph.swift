@@ -127,7 +127,7 @@ class Graph: SKNode {
                     let x = Double(i)*x_step
                     let y = plot.line_function!(x, plot.coeff!)
                     let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
-                    linepoints.append(CGPoint(x: (width)*(pos.x-0.5), y: (height)*(pos.y-0.5)))
+                    linepoints.append(CGPoint(x: squeeze!*(width)*(pos.x-0.5), y: squeeze!*(height)*(pos.y-0.5)))
                 }
                 let curve = SKShapeNode(points: &linepoints, count: linepoints.count)
                 curve.strokeColor = plot.label_color!

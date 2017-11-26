@@ -21,8 +21,8 @@ class GameScene: SKScene {
     func generatePoints(n: Int) -> [(x:Double, y: Double)] {
         var points:[(x:Double, y: Double)]! = []
         for _ in 0..<n {
-            let random_x = Double(CGFloat.random(min: 0, max: 1))
-            let random_y = Double(CGFloat.random(min: 0, max: 1))
+            let random_x = Double(Int.random(min: 0, max: 100))/10
+            let random_y = Double(Int.random(min: 0, max: 100))/10
             points.append((x: random_x, y: random_y))
         }
         return points
@@ -39,11 +39,9 @@ class GameScene: SKScene {
         
 
         //use linear regression to find regression line for testplo1
-        for d in 2..<3 {
-            let regression = createRegression(data: testdata, degree: d)
-            regression.series_name = "degree \(d)"
+            let regression = createRegression(data: testdata, degree: 2)
+            regression.series_name = "degree \(2)"
             testplots.append(regression)
-        }
 
         //add graph
         let testgraph = Graph(height: 400, width: 600, plots: testplots, squeeze: 0.8)
@@ -62,9 +60,13 @@ class GameScene: SKScene {
         let xColumn = M.transpose().array[0]
         let yColumn = M.transpose().array[1]
         let X = mapFeatures(X:Matrix([xColumn]).transpose() , degree: degree)
-        let finaltheta = gradientDescent(X: X, y: Matrix([yColumn]).transpose(), initial_theta: Matrix.zeros(size: (degree+1,1)), learningRate: 0.0001, max_iterations: 1000000)
-        //create plot for line
+        let y = Matrix([yColumn]).transpose()
         
+        //gradient descent
+        //let finaltheta = gradientDescent(X: X, y: y, initial_theta: Matrix.zeros(size: (degree+1,1)), learningRate: 0.0001, max_iterations: 100000)
+        
+        //normal equation
+        let finaltheta = ((X.transpose() <*> X).inverse()) <*> (X.transpose() <*> y)
         let hypothesis:predictF! = hypothesis(x:theta:)
         let lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
         return lineplot
