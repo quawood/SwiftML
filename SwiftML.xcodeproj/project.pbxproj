@@ -19,6 +19,8 @@
 		A5E3557A1FC90A98003950E4 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355791FC90A98003950E4 /* Graph.swift */; };
 		A5E3557C1FC90C3F003950E4 /* Plot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3557B1FC90C3F003950E4 /* Plot.swift */; };
 		A5E3557F1FC933BF003950E4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3557E1FC933BF003950E4 /* Extensions.swift */; };
+		A5E355821FCA0945003950E4 /* LinReg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355811FCA0945003950E4 /* LinReg.swift */; };
+		A5E355841FCA0B85003950E4 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355831FCA0B85003950E4 /* Matrix.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		A5E355791FC90A98003950E4 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		A5E3557B1FC90C3F003950E4 /* Plot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plot.swift; sourceTree = "<group>"; };
 		A5E3557E1FC933BF003950E4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A5E355811FCA0945003950E4 /* LinReg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinReg.swift; sourceTree = "<group>"; };
+		A5E355831FCA0B85003950E4 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,8 @@
 		A5E355801FC953AE003950E4 /* Machine Learning */ = {
 			isa = PBXGroup;
 			children = (
+				A5E355811FCA0945003950E4 /* LinReg.swift */,
+				A5E355831FCA0B85003950E4 /* Matrix.swift */,
 			);
 			path = "Machine Learning";
 			sourceTree = "<group>";
@@ -294,8 +300,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5E3557A1FC90A98003950E4 /* Graph.swift in Sources */,
+				A5E355821FCA0945003950E4 /* LinReg.swift in Sources */,
 				A5E3557F1FC933BF003950E4 /* Extensions.swift in Sources */,
 				A5E355501FC906AA003950E4 /* ViewController.swift in Sources */,
+				A5E355841FCA0B85003950E4 /* Matrix.swift in Sources */,
 				A5E3554E1FC906AA003950E4 /* GameScene.swift in Sources */,
 				A5E3557C1FC90C3F003950E4 /* Plot.swift in Sources */,
 				A5E355481FC906AA003950E4 /* AppDelegate.swift in Sources */,

@@ -14,7 +14,7 @@ class Plot: NSObject {
     var data: [(x: Double, y: Double)]?
     var label_color: SKColor? = SKColor.red
     var label_marker: SKNode?
-    
+    var series_name: String?
     var x_range: ClosedRange! = 0.0...1.0
     var y_range: ClosedRange! = 0.0...1.0
     
