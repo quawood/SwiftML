@@ -9,7 +9,7 @@
 import Cocoa
 import SpriteKit
 import GameKit
-
+typealias predictF = (Double, Matrix) -> (Double)
 class Plot: NSObject {
     var data: [(x: Double, y: Double)]?
     var label_color: SKColor? = SKColor.red
@@ -17,6 +17,12 @@ class Plot: NSObject {
     var series_name: String?
     var x_range: ClosedRange! = 0.0...1.0
     var y_range: ClosedRange! = 0.0...1.0
+    
+    var isLine: Bool! = false
+    
+    var line_function: predictF? = { _,_ in return 0.0}
+    var coeff: Matrix? = Matrix.zeros(size: (2,1))
+    
     
     init(data: [(x: Double, y: Double)], label_color: SKColor, label_marker: String) {
         super.init()
@@ -27,7 +33,7 @@ class Plot: NSObject {
         self.label_marker = SKNode()
         switch label_marker {
         case "+":
-            let r = 4
+            let r = 6
             var y_points = [CGPoint(x:0,y:-r),CGPoint(x:0,y:r)]
             var x_points = [CGPoint(x:-r,y:0),CGPoint(x:r,y:0)]
             let y_line = SKShapeNode(points: &y_points, count: y_points.count)
@@ -56,6 +62,15 @@ class Plot: NSObject {
         
         self.x_range = x_array.min()!...x_array.max()!
         self.y_range = y_array.min()!...y_array.max()!
+    }
+    
+    init(function: @escaping predictF, theta: Matrix, line_color: SKColor) {
+        super.init()
+        self.isLine = true
+        self.label_color = line_color
+        self.line_function = function
+        self.coeff = theta
+        
     }
     
 }

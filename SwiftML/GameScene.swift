@@ -21,8 +21,8 @@ class GameScene: SKScene {
     func generatePoints(n: Int) -> [(x:Double, y: Double)] {
         var points:[(x:Double, y: Double)]! = []
         for _ in 0..<n {
-            let random_x = Double(CGFloat.random(min: 0, max: 50))
-            let random_y = Double(CGFloat.random(min: 0, max: 50))
+            let random_x = Double(CGFloat.random(min: 0, max: 1))
+            let random_y = Double(CGFloat.random(min: 0, max: 1))
             points.append((x: random_x, y: random_y))
         }
         return points
@@ -30,33 +30,44 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         var testplots:[Plot]! = []
-        var testdata:[(x:Double, y: Double)]! = [(0,0),(1,1),(2,2)]
+        var testdata:[(x:Double, y: Double)]! = generatePoints(n: 8)
         
         //create test plots
         let testplot1 = Plot(data: testdata, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
         testplot1.series_name = "blue"
-        let testplot2 = Plot(data: generatePoints(n: 15), label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
-        testplot2.series_name = "yellow"
-        let testplot3 = Plot(data: generatePoints(n: 15), label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
-        testplot3.series_name = "magenta"
-        
-        //add testplots to graph and setup other peripherals
         testplots.append(testplot1)
+        
 
+        //use linear regression to find regression line for testplo1
+        for d in 2..<3 {
+            let regression = createRegression(data: testdata, degree: d)
+            regression.series_name = "degree \(d)"
+            testplots.append(regression)
+        }
+
+        //add graph
         let testgraph = Graph(height: 400, width: 600, plots: testplots, squeeze: 0.8)
         testgraph.x_label = "random x"
         testgraph.y_label = "random y"
         testgraph.addLabels()
         testgraph.addLegend()
         
-        
         self.addChild(testgraph)
-        
-        let M = Matrix(testdata)
-        let finaltheta = gradientDescent(X: Matrix(M.FM), y: Matrix(M.yV), initial_theta: Matrix([[0],[0]]), learningRate: 0.1, iterations: 1000)
-        
 
         
+    }
+    
+    func createRegression(data: [(x:Double, y: Double)], degree: Int) -> Plot {
+        let M = Matrix(data)
+        let xColumn = M.transpose().array[0]
+        let yColumn = M.transpose().array[1]
+        let X = mapFeatures(X:Matrix([xColumn]).transpose() , degree: degree)
+        let finaltheta = gradientDescent(X: X, y: Matrix([yColumn]).transpose(), initial_theta: Matrix.zeros(size: (degree+1,1)), learningRate: 0.0001, max_iterations: 1000000)
+        //create plot for line
+        
+        let hypothesis:predictF! = hypothesis(x:theta:)
+        let lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
+        return lineplot
     }
     
     override func update(_ currentTime: TimeInterval) {

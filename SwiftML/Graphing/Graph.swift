@@ -104,20 +104,38 @@ class Graph: SKNode {
         let y_dif = range.upperBound - range.lowerBound
         
         for plot in plots {
-            for point in plot.data! {
-                let x = point.x
-                let y = point.y
-                
-                var marker = SKNode()
-                marker = plot.label_marker?.copy() as! SKNode
-                
-                let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
-                marker.position = CGPoint(x: (squeeze!*width)*(pos.x-0.5), y: (squeeze!*height)*(pos.y-0.5))
-                
-                marker.removeFromParent()
-                self.addChild(marker)
-                
+            if !plot.isLine {
+                for point in plot.data! {
+                    let x = point.x
+                    let y = point.y
+                    
+                    var marker = SKNode()
+                    marker = plot.label_marker?.copy() as! SKNode
+                    
+                    let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
+                    marker.position = CGPoint(x: (squeeze!*width)*(pos.x-0.5), y: (squeeze!*height)*(pos.y-0.5))
+                    
+                    marker.removeFromParent()
+                    self.addChild(marker)
+                    
+                }
+            } else {
+                var linepoints: [CGPoint] = []
+                let n = 100
+                let x_step = x_dif/100
+                for i in 0...100 {
+                    let x = Double(i)*x_step
+                    let y = plot.line_function!(x, plot.coeff!)
+                    let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
+                    linepoints.append(CGPoint(x: (width)*(pos.x-0.5), y: (height)*(pos.y-0.5)))
+                }
+                let curve = SKShapeNode(points: &linepoints, count: linepoints.count)
+                curve.strokeColor = plot.label_color!
+                curve.lineWidth = 1
+                curve.zPosition = -2
+                self.addChild(curve)
             }
+
         }
     }
     

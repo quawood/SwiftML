@@ -19,27 +19,43 @@ func cost(X: Matrix, y: Matrix, theta: Matrix) -> Double {
 
 func gradient(X: Matrix, y: Matrix, theta: Matrix) -> Matrix {
     let h = X <*> theta
-    let m = Double(X.rows)
-    
-    let gradient = (1/m)*X.transpose()<*>(h-y)
+
+    let gradient = X.transpose()<*>(h-y)
     return gradient
 }
 
-func gradientDescent(X: Matrix, y: Matrix, initial_theta: Matrix, learningRate: Double, iterations: Int) -> Matrix {
-    var holder = Matrix.zeros(size: (initial_theta.rows, 1))
-    holder = initial_theta
+func gradientDescent(X: Matrix, y: Matrix, initial_theta: Matrix, learningRate: Double, max_iterations: Int) -> Matrix {
+    let m = Double(X.rows)
+    var holder = initial_theta
+    var running = true
     var i = 0
-    while i<iterations {
-        holder = holder - gradient(X: X, y: y, theta: holder)*learningRate
+    while running {
+        holder = holder - gradient(X: X, y: y, theta: holder)*learningRate*(1/m)
         i = i + 1
+        if i > max_iterations {
+            running = false
+        }
         
     }
     return holder
 }
+func hypothesis(x: Double, theta: Matrix) -> Double {
 
-//func mapFeatures(X: Matrix) -> Matrix {
-//
-//}
+    let dummy = Matrix([[x]])
+    let F = mapFeatures(X: dummy, degree: theta.rows-1)
+
+    let answer = F <*> theta
+    
+    return answer.sum()
+}
+func mapFeatures(X: Matrix, degree: Int) -> Matrix {
+    var holder: [[Double]] = []
+    for d in 0...degree {
+        let row = X.transpose().pow(Double(d))
+        holder.append(row.array[0])
+    }
+    return Matrix(holder).transpose()
+}
 //
 //func normalizeFeatures(X: Matrix) -> Matrix {
 //

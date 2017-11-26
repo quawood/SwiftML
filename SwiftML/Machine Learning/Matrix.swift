@@ -4,8 +4,6 @@ import Accelerate
 public struct Matrix {
     public let rows: Int
     public let columns: Int
-    var FM: [[Double]] = [[]]
-    var yV: [[Double]] = [[]]
     var grid: [Double]
 }
 
@@ -56,16 +54,10 @@ extension Matrix {
     
     public init(_ data:[(x:Double, y: Double)]) {
         var holder: [[Double]] = []
-        var FMholder: [[Double]] = []
-        var yVholder: [[Double]] = []
         data.forEach({point in
-            holder.append([1, point.x, point.y])
-            FMholder.append([1, point.x])
-            yVholder.append([point.y])
+            holder.append([point.x, point.y])
         })
         self.init(holder)
-        self.FM = FMholder
-        self.yV = yVholder
     }
     
     /* Creates a matrix from a row vector or column vector. */
