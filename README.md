@@ -1,5 +1,4 @@
-# SwiftML
-swiftML
+
 MOST RECENT CHANGES LOG:
 
 Implemented linear regression with freedom to choose type of polynomial.
