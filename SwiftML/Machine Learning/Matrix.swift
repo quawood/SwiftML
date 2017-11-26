@@ -4,11 +4,14 @@ import Accelerate
 public struct Matrix {
     public let rows: Int
     public let columns: Int
+    var FM: [[Double]] = [[]]
+    var yV: [[Double]] = [[]]
     var grid: [Double]
 }
 
 // MARK: - Creating matrices
 extension Matrix {
+    
     public init(rows: Int, columns: Int, repeatedValue: Double) {
         self.rows = rows
         self.columns = columns
@@ -49,6 +52,20 @@ extension Matrix {
     
     public init(_ data: [[Double]], range: CountableClosedRange<Int>) {
         self.init(data, range: CountableRange(range))
+    }
+    
+    public init(_ data:[(x:Double, y: Double)]) {
+        var holder: [[Double]] = []
+        var FMholder: [[Double]] = []
+        var yVholder: [[Double]] = []
+        data.forEach({point in
+            holder.append([1, point.x, point.y])
+            FMholder.append([1, point.x])
+            yVholder.append([point.y])
+        })
+        self.init(holder)
+        self.FM = FMholder
+        self.yV = yVholder
     }
     
     /* Creates a matrix from a row vector or column vector. */
