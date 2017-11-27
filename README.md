@@ -4,8 +4,8 @@ Current capabilities:
 * Create polynomial regressions on data
 ** Linear regression using both gradient descent and normal equation
 
-![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/sample.png)
-![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/sample2.png)
+![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/samples/sample1.png)
+![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/samples/sample2.png)
 
 Challenges:
 * Difficult to increase degree past 5 without needing to wait significant time for graph
