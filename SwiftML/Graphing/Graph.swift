@@ -31,14 +31,14 @@ class Graph: SKNode {
         let graph_origin = CGPoint(x: -width/2, y: -height/2)
         var y_points = [graph_origin,
                        CGPoint(x:graph_origin.x, y: height + graph_origin.y)]
-        var x_points = [graph_origin,
+        var x_points = [CGPoint(x:graph_origin.x-1,y:graph_origin.y),
                        CGPoint(x:graph_origin.x + width, y: graph_origin.y)]
         let y_axis = SKShapeNode(points: &y_points, count: y_points.count)
         let x_axis = SKShapeNode(points: &x_points, count: x_points.count)
-        y_axis.strokeColor = NSColor(calibratedRed:0.2, green: 0.2, blue: 0.2, alpha: 1.0)
-        y_axis.lineWidth = 3
-        x_axis.strokeColor = NSColor(calibratedRed:0.2, green: 0.2, blue: 0.2, alpha: 1.0)
-        x_axis.lineWidth = 3
+        y_axis.strokeColor = NSColor.black
+        y_axis.lineWidth = 1
+        x_axis.strokeColor = NSColor.black
+        x_axis.lineWidth = 1
         self.addChild(y_axis)
         self.addChild(x_axis)
   

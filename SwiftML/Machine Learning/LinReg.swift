@@ -56,6 +56,10 @@ func mapFeatures(X: Matrix, degree: Int) -> Matrix {
     }
     return Matrix(holder).transpose()
 }
+
+func normalEquation(X: Matrix, y: Matrix) -> Matrix{
+    return ((X.transpose() <*> X).inverse()) <*> (X.transpose() <*> y)
+}
 //
 //func normalizeFeatures(X: Matrix) -> Matrix {
 //

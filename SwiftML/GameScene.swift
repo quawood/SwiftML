@@ -30,12 +30,20 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         var testplots:[Plot]! = []
-        var testdata:[(x:Double, y: Double)]! = generatePoints(n: 8)
+        var testdata:[(x:Double, y: Double)]! = generatePoints(n: 3)
         
         //create test plots
         let testplot1 = Plot(data: testdata, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
         testplot1.series_name = "blue"
         testplots.append(testplot1)
+        
+        let testplot2 = Plot(data: generatePoints(n: 3), label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
+        testplot2.series_name = "yellow"
+        let testplot3 = Plot(data: generatePoints(n: 3), label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
+        testplot3.series_name = "magenta"
+        
+        testplots.append(testplot2)
+        testplots.append(testplot3)
         
 
         //use linear regression to find regression line for testplo1
@@ -66,7 +74,7 @@ class GameScene: SKScene {
         //let finaltheta = gradientDescent(X: X, y: y, initial_theta: Matrix.zeros(size: (degree+1,1)), learningRate: 0.0001, max_iterations: 100000)
         
         //normal equation
-        let finaltheta = ((X.transpose() <*> X).inverse()) <*> (X.transpose() <*> y)
+        let finaltheta = normalEquation(X: X, y: y)
         let hypothesis:predictF! = hypothesis(x:theta:)
         let lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
         return lineplot
