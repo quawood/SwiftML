@@ -10,7 +10,7 @@ import Cocoa
 import SpriteKit
 import GameKit
 
-class Graph: SKCropNode {
+class Graph: SKNode {
     var width: CGFloat! = 400
     var height: CGFloat! = 400
     var domain: ClosedRange! = 0.0...10.0
@@ -45,7 +45,7 @@ class Graph: SKCropNode {
         self.addChild(y_axis)
         self.addChild(x_axis)
         cropNode = SKCropNode()
-        cropNode.maskNode = SKSpriteNode(color: NSColor.black, size: CGSize(width: width+300, height: height+2))
+        cropNode.maskNode = SKSpriteNode(color: NSColor.black, size: CGSize(width: width, height: height))
         cropNode.zPosition = 3
         self.addChild(cropNode)
         
@@ -142,10 +142,9 @@ class Graph: SKCropNode {
                 }
             } else {
                 var linepoints: [CGPoint] = []
-                let n = 100
                 let x_step = x_dif/100
                 for i in 0...100 {
-                    let x = Double(i)*x_step
+                    let x = domain.lowerBound + Double(i)*x_step
                     let y = plot.line_function!(x, plot.coeff!)
                     let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
                     linepoints.append(CGPoint(x: squeeze!*(width)*(pos.x-0.5), y: squeeze!*(height)*(pos.y-0.5)))

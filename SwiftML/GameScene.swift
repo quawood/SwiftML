@@ -45,7 +45,7 @@ class GameScene: SKScene {
         var testplots:[Plot]! = []
         
         //create test data
-        let testdata1:[(x:Double, y: Double)]! = generatePoints(n:900)
+        let testdata1:[(x:Double, y: Double)]! = generatePoints(n:3)
         let testdata2:[(x:Double, y: Double)]! = generatePoints(n:900)
         let testdata3:[(x:Double, y: Double)]! = generatePoints(n:900)
         
@@ -59,13 +59,13 @@ class GameScene: SKScene {
         testplot3.series_name = "magenta"
         
         testplots.append(testplot1)
-        testplots.append(testplot2)
-        testplots.append(testplot3)
+//        testplots.append(testplot2)
+//        testplots.append(testplot3)
 
 
         //create regressions for test plots
-//        let regression = createRegression(data: testdata1, degree: 3)
-//        testplots.append(regression)
+        let regression = createRegression(data: testdata1, degree: 2)
+        testplots.append(regression)
 //
 //        let regression2 = createRegression(data: testdata2, degree: 2, color: SKColor(calibratedRed: 0.949-0.7, green: 0.7804-0.7, blue: 0, alpha: 1.0))
 //        testplots.append(regression2)
