@@ -21,6 +21,7 @@
 		A5E3557F1FC933BF003950E4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E3557E1FC933BF003950E4 /* Extensions.swift */; };
 		A5E355821FCA0945003950E4 /* LinReg.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355811FCA0945003950E4 /* LinReg.swift */; };
 		A5E355841FCA0B85003950E4 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355831FCA0B85003950E4 /* Matrix.swift */; };
+		A5E355861FCBC9C8003950E4 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = A5E355851FCBC9C8003950E4 /* sample.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		A5E3557E1FC933BF003950E4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A5E355811FCA0945003950E4 /* LinReg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinReg.swift; sourceTree = "<group>"; };
 		A5E355831FCA0B85003950E4 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		A5E355851FCBC9C8003950E4 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				A5E355491FC906AA003950E4 /* GameScene.sks */,
 				A5E3554B1FC906AA003950E4 /* Actions.sks */,
 				A5E3554D1FC906AA003950E4 /* GameScene.swift */,
+				A5E355851FCBC9C8003950E4 /* sample.png */,
 				A5E355801FC953AE003950E4 /* Machine Learning */,
 				A5E3557D1FC90C92003950E4 /* Graphing */,
 				A5E3554F1FC906AA003950E4 /* ViewController.swift */,
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5E3554A1FC906AA003950E4 /* GameScene.sks in Resources */,
+				A5E355861FCBC9C8003950E4 /* sample.png in Resources */,
 				A5E355521FC906AA003950E4 /* Assets.xcassets in Resources */,
 				A5E3554C1FC906AA003950E4 /* Actions.sks in Resources */,
 				A5E355551FC906AA003950E4 /* Main.storyboard in Resources */,
