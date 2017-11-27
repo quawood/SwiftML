@@ -22,8 +22,8 @@ class GameScene: SKScene {
         var points:[(x:Double, y: Double)]! = []
         for _ in 0..<n {
             //pure random
-//            let random_x = Double(CGFloat.random(min:0, max: 1))
-//            let random_y = Double(CGFloat.random(min:0, max: 1))
+            let random_x = Double(CGFloat.random(min:0, max: 1))
+            let random_y = Double(CGFloat.random(min:0, max: 1))
             
             
             
@@ -31,11 +31,11 @@ class GameScene: SKScene {
 //            let r = Double(CGFloat.random(min:0, max: 1))
             
             //even circular distribution
-            let r = sqrt(Double(CGFloat.random(min:0, max: 1)))
-            
-            let angle = Double(CGFloat.random(min: 0, max: CGFloat(2*Double.pi)))
-            let random_x = r*cos(angle)
-            let random_y = r*sin(angle)
+//            let r = sqrt(Double(CGFloat.random(min:0, max: 1)))
+//            
+//            let angle = Double(CGFloat.random(min: 0, max: CGFloat(2*Double.pi)))
+//            let random_x = r*cos(angle)
+//            let random_y = r*sin(angle)
             points.append((x: random_x, y: random_y))
         }
         return points
@@ -45,12 +45,12 @@ class GameScene: SKScene {
         var testplots:[Plot]! = []
         
         //create test data
-        let testdata1:[(x:Double, y: Double)]! = generatePoints(n:3)
+        let testdata1:[(x:Double, y: Double)]! = generatePoints(n:6)
         let testdata2:[(x:Double, y: Double)]! = generatePoints(n:900)
         let testdata3:[(x:Double, y: Double)]! = generatePoints(n:900)
         
         //create test plots from test data
-        let testplot1 = Plot(data: testdata1, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
+        let testplot1 = Plot(data: testdata1, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "o")
         testplot1.series_name = "blue"
         
         let testplot2 = Plot(data: testdata2, label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
@@ -64,7 +64,7 @@ class GameScene: SKScene {
 
 
         //create regressions for test plots
-        let regression = createRegression(data: testdata1, degree: 2)
+        let regression = createRegression(data: testdata1, degree: 4)
         testplots.append(regression)
 //
 //        let regression2 = createRegression(data: testdata2, degree: 2, color: SKColor(calibratedRed: 0.949-0.7, green: 0.7804-0.7, blue: 0, alpha: 1.0))
