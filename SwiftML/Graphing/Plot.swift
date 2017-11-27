@@ -77,6 +77,8 @@ class Plot: NSObject {
         self.line_function = function
         self.coeff = theta
         
+        
+        
     }
     
 }
