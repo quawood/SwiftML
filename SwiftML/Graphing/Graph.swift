@@ -116,10 +116,23 @@ class Graph: SKNode {
     
     func addPlots(plots: [Plot]) {
         let non_lines = plots.filter({!$0.isLine})
-        let xlow = non_lines.map({($0 as Plot).x_range.lowerBound}).min()!
-        let xhigh = non_lines.map({($0 as Plot).x_range.upperBound}).max()!
-        let ylow = non_lines.map({($0 as Plot).y_range.lowerBound}).min()!
-        let yhigh = non_lines.map({($0 as Plot).y_range.upperBound}).max()!
+        
+        var xlow:Double! = 0
+        var xhigh:Double! = 0
+        var ylow:Double! = 0
+        var yhigh:Double! = 0
+        
+        if non_lines != nil {
+            xlow = non_lines.map({($0 as Plot).x_range.lowerBound}).min()
+            xhigh = non_lines.map({($0 as Plot).x_range.upperBound}).max()
+            ylow = non_lines.map({($0 as Plot).y_range.lowerBound}).min()
+            yhigh = non_lines.map({($0 as Plot).y_range.upperBound}).max()
+        } else {
+            xlow = plots.map({($0 as Plot).x_range.lowerBound}).min()
+            xhigh = plots.map({($0 as Plot).x_range.upperBound}).max()
+            ylow = plots.map({($0 as Plot).y_range.lowerBound}).min()
+            yhigh = plots.map({($0 as Plot).y_range.upperBound}).max()
+        }
         self.domain = xlow...xhigh
         self.range = ylow...yhigh
         let x_dif = domain.upperBound - domain.lowerBound
