@@ -48,7 +48,7 @@ class Graph: SKCropNode {
         cropNode.maskNode = SKSpriteNode(color: NSColor.black, size: CGSize(width: width+300, height: height+2))
         cropNode.zPosition = 3
         self.addChild(cropNode)
-        print(cropNode.frame)
+        
         
 
         
