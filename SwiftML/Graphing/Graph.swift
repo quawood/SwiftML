@@ -10,7 +10,7 @@ import Cocoa
 import SpriteKit
 import GameKit
 
-class Graph: SKNode {
+class Graph: SKCropNode {
     var width: CGFloat! = 400
     var height: CGFloat! = 400
     var domain: ClosedRange! = 0.0...10.0
@@ -19,6 +19,7 @@ class Graph: SKNode {
     var x_label: String! = "x-axis" 
     var y_label: String! = "y-axis"
 
+    var cropNode: SKCropNode!
     var plots: [Plot]?
     var squeeze: CGFloat?
     
@@ -39,8 +40,18 @@ class Graph: SKNode {
         y_axis.lineWidth = 1
         x_axis.strokeColor = NSColor.black
         x_axis.lineWidth = 1
+        
+        
         self.addChild(y_axis)
         self.addChild(x_axis)
+        cropNode = SKCropNode()
+        cropNode.maskNode = SKSpriteNode(color: NSColor.black, size: CGSize(width: width+300, height: height+2))
+        cropNode.zPosition = 3
+        self.addChild(cropNode)
+        print(cropNode.frame)
+        
+
+        
   
     }
 
@@ -49,6 +60,7 @@ class Graph: SKNode {
         self.plots = plots
         self.squeeze = squeeze
         
+
         addPlots(plots: plots)
         
         }
@@ -65,7 +77,11 @@ class Graph: SKNode {
 
         
         legend.position = CGPoint(x: (width/2) + CGFloat(roww/2), y: (height/2)-CGFloat(legendh/2))
+        var c = 0
         for i in 0..<n {
+            if plots![i].isLine {
+                c = c + 1
+            }
             var tick_points = [CGPoint(x:(-roww/2)+10,y:(legendh-rowh)/2 - (i*rowh)), CGPoint(x:(-roww/2)+30,y:(legendh-rowh)/2 - (i*rowh))]
             let tick = SKShapeNode(points: &tick_points, count: tick_points.count)
             tick.strokeColor = plots![i].label_color!
@@ -77,7 +93,12 @@ class Graph: SKNode {
             if let name = plots![i].series_name {
                 plotLabel = SKLabelNode(text: name)
             } else {
-                plotLabel = SKLabelNode(text: "series \(i+1)")
+                if !plots![i].isLine {
+                    plotLabel = SKLabelNode(text: "series \(i+1)")
+                } else {
+                    plotLabel = SKLabelNode(text: "Line \(c)")
+                }
+                
             }
             plotLabel.fontSize = 15
             plotLabel.fontColor = NSColor.black
@@ -116,7 +137,7 @@ class Graph: SKNode {
                     marker.position = CGPoint(x: (squeeze!*width)*(pos.x-0.5), y: (squeeze!*height)*(pos.y-0.5))
                     
                     marker.removeFromParent()
-                    self.addChild(marker)
+                    cropNode.addChild(marker)
                     
                 }
             } else {
@@ -133,7 +154,7 @@ class Graph: SKNode {
                 curve.strokeColor = plot.label_color!
                 curve.lineWidth = 1
                 curve.zPosition = -2
-                self.addChild(curve)
+                cropNode.addChild(curve)
             }
 
         }

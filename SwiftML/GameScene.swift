@@ -30,26 +30,35 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         var testplots:[Plot]! = []
-        var testdata:[(x:Double, y: Double)]! = generatePoints(n: 3)
         
-        //create test plots
-        let testplot1 = Plot(data: testdata, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
+        //create test data
+        let testdata1:[(x:Double, y: Double)]! = generatePoints(n: 15)
+        let testdata2:[(x:Double, y: Double)]! = generatePoints(n: 15)
+        let testdata3:[(x:Double, y: Double)]! = generatePoints(n: 15)
+        
+        //create test plots from test data
+        let testplot1 = Plot(data: testdata1, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
         testplot1.series_name = "blue"
-        testplots.append(testplot1)
         
-        let testplot2 = Plot(data: generatePoints(n: 3), label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
+        let testplot2 = Plot(data: testdata2, label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
         testplot2.series_name = "yellow"
-        let testplot3 = Plot(data: generatePoints(n: 3), label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
+        let testplot3 = Plot(data: testdata3, label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
         testplot3.series_name = "magenta"
         
+        testplots.append(testplot1)
         testplots.append(testplot2)
         testplots.append(testplot3)
         
 
-        //use linear regression to find regression line for testplo1
-            let regression = createRegression(data: testdata, degree: 2)
-            regression.series_name = "degree \(2)"
-            testplots.append(regression)
+        //create regressions for test plots
+//        let regression = createRegression(data: testdata1, degree: 2, color: SKColor(calibratedRed: 0, green: 0, blue: 0.2, alpha: 1.0))
+//        testplots.append(regression)
+//
+//        let regression2 = createRegression(data: testdata2, degree: 2, color: SKColor(calibratedRed: 0.949-0.7, green: 0.7804-0.7, blue: 0, alpha: 1.0))
+//        testplots.append(regression2)
+//
+//        let regression3 = createRegression(data: testdata3, degree: 2, color: SKColor(calibratedRed: 0.8863-0.6, green: 0.4706-0.6, blue: 0.6078-0.6, alpha: 1.0))
+//        testplots.append(regression3)
 
         //add graph
         let testgraph = Graph(height: 400, width: 600, plots: testplots, squeeze: 0.8)
@@ -63,7 +72,7 @@ class GameScene: SKScene {
         
     }
     
-    func createRegression(data: [(x:Double, y: Double)], degree: Int) -> Plot {
+    func createRegression(data: [(x:Double, y: Double)], degree: Int, color: SKColor? = nil) -> Plot {
         let M = Matrix(data)
         let xColumn = M.transpose().array[0]
         let yColumn = M.transpose().array[1]
@@ -76,7 +85,11 @@ class GameScene: SKScene {
         //normal equation
         let finaltheta = normalEquation(X: X, y: y)
         let hypothesis:predictF! = hypothesis(x:theta:)
-        let lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
+        var lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
+        if let color = color {
+            lineplot.label_color = color
+        }
+        
         return lineplot
     }
     
