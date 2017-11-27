@@ -10,3 +10,5 @@ Ideas for fixes:
 *feature normalization
 
 I want to be able to also create regression for curves that are not functions (such as points around a circle)
+
+![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/sample.png)
