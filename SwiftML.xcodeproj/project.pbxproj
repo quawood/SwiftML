@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A584DB361FCBFA2E0053784F /* sample1.png in Resources */ = {isa = PBXBuildFile; fileRef = A584DB351FCBFA2E0053784F /* sample1.png */; };
+		A584DB381FCBFA370053784F /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = A584DB371FCBFA370053784F /* sample2.png */; };
 		A5E355481FC906AA003950E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E355471FC906AA003950E4 /* AppDelegate.swift */; };
 		A5E3554A1FC906AA003950E4 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5E355491FC906AA003950E4 /* GameScene.sks */; };
 		A5E3554C1FC906AA003950E4 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A5E3554B1FC906AA003950E4 /* Actions.sks */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A584DB351FCBFA2E0053784F /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
+		A584DB371FCBFA370053784F /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
 		A5E355441FC906AA003950E4 /* SwiftML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E355471FC906AA003950E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5E355491FC906AA003950E4 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -89,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A584DB341FCBFA250053784F /* samples */ = {
+			isa = PBXGroup;
+			children = (
+				A584DB371FCBFA370053784F /* sample2.png */,
+				A584DB351FCBFA2E0053784F /* sample1.png */,
+			);
+			path = samples;
+			sourceTree = "<group>";
+		};
 		A5E3553B1FC906AA003950E4 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +129,7 @@
 				A5E355491FC906AA003950E4 /* GameScene.sks */,
 				A5E3554B1FC906AA003950E4 /* Actions.sks */,
 				A5E3554D1FC906AA003950E4 /* GameScene.swift */,
+				A584DB341FCBFA250053784F /* samples */,
 				A5E355801FC953AE003950E4 /* Machine Learning */,
 				A5E3557D1FC90C92003950E4 /* Graphing */,
 				A5E3554F1FC906AA003950E4 /* ViewController.swift */,
@@ -273,7 +287,9 @@
 			files = (
 				A5E3554A1FC906AA003950E4 /* GameScene.sks in Resources */,
 				A5E355521FC906AA003950E4 /* Assets.xcassets in Resources */,
+				A584DB381FCBFA370053784F /* sample2.png in Resources */,
 				A5E3554C1FC906AA003950E4 /* Actions.sks in Resources */,
+				A584DB361FCBFA2E0053784F /* sample1.png in Resources */,
 				A5E355551FC906AA003950E4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
