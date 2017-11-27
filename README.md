@@ -14,3 +14,7 @@ Challenges:
 Ideas for fixes: 
 * feature normalization
 * want to be able to create curves that are not necessarily functions (e.g. circles)
+
+Next up:
+* K-means clustering
+* manual graph scaling
