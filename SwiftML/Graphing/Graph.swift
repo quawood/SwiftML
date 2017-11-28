@@ -122,7 +122,7 @@ class Graph: SKNode {
         var ylow:Double! = 0
         var yhigh:Double! = 0
         
-        if non_lines != nil {
+        if non_lines.count != 0 {
             xlow = non_lines.map({($0 as Plot).x_range.lowerBound}).min()
             xhigh = non_lines.map({($0 as Plot).x_range.upperBound}).max()
             ylow = non_lines.map({($0 as Plot).y_range.lowerBound}).min()

@@ -98,7 +98,7 @@ class GameScene: SKScene {
         //normal equation
         let finaltheta = normalEquation(X: X, y: y)
         let hypothesis:predictF! = hypothesis(x:theta:)
-        var lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
+        let lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
         if let color = color {
             lineplot.label_color = color
         }
