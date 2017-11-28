@@ -10,6 +10,7 @@ import Cocoa
 import SpriteKit
 import GameKit
 typealias predictF = (Double, Matrix) -> (Double)
+
 class Plot: NSObject {
     var data: [(x: Double, y: Double)]?
     var label_color: SKColor! = SKColor.black
@@ -17,11 +18,14 @@ class Plot: NSObject {
     var series_name: String?
     var x_range: ClosedRange! = 0.0...1.0
     var y_range: ClosedRange! = 0.0...1.0
-    
+
     var isLine: Bool! = false
+    var isParametric: Bool! = false
     
     var line_function: predictF? = { _,_ in return 0.0}
     var coeff: Matrix? = Matrix.zeros(size: (2,1))
+    
+    var para_coeff: [Matrix]? = []
     
     
     init(data: [(x: Double, y: Double)], label_color: SKColor? = nil, label_marker: String? = nil) {
@@ -70,13 +74,30 @@ class Plot: NSObject {
         self.y_range = y_array.min()!...y_array.max()!
     }
     
-    init(function: @escaping predictF, theta: Matrix, line_color: SKColor) {
+    init(function: @escaping predictF, theta: Matrix, line_color: SKColor? = nil) {
         super.init()
         self.isLine = true
-        self.label_color = line_color
+        if line_color != nil {
+            self.label_color = line_color
+        }
+        
         self.line_function = function
         self.coeff = theta
         
+        
+        
+    }
+    
+    init(functions: @escaping predictF, thetaSet: [Matrix], line_color: SKColor? = nil) {
+        super.init()
+        self.isParametric = true
+        self.isLine = true
+        if line_color != nil {
+            self.label_color = line_color
+        }
+        
+        self.line_function = functions
+        self.para_coeff = thetaSet
         
         
     }

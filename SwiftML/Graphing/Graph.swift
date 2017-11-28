@@ -139,6 +139,7 @@ class Graph: SKNode {
         let y_dif = range.upperBound - range.lowerBound
         
         for plot in plots {
+            var linepoints: [CGPoint] = []
             if !plot.isLine {
                 for point in plot.data! {
                     let x = point.x
@@ -154,21 +155,31 @@ class Graph: SKNode {
                     cropNode.addChild(marker)
                     
                 }
-            } else {
-                var linepoints: [CGPoint] = []
+            } else if plot.isLine && !plot.isParametric{
+                linepoints = []
                 let x_step = x_dif/100
-                for i in 0...100 {
+                for i in 0...9 {
                     let x = domain.lowerBound + Double(i)*x_step
                     let y = plot.line_function!(x, plot.coeff!)
                     let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
                     linepoints.append(CGPoint(x: squeeze!*(width)*(pos.x-0.5), y: squeeze!*(height)*(pos.y-0.5)))
                 }
-                let curve = SKShapeNode(points: &linepoints, count: linepoints.count)
-                curve.strokeColor = plot.label_color!
-                curve.lineWidth = 1
-                curve.zPosition = -2
-                cropNode.addChild(curve)
+            } else if plot.isParametric {
+                for i in 0...400{
+                    let t = Double(i) * (9/400)
+                    let x = hypothesis(x: t, theta: (plot.para_coeff?[0])!)
+                    let y = hypothesis(x: t, theta: (plot.para_coeff?[1])!)
+                    let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
+                    linepoints.append(CGPoint(x: squeeze!*(width)*(pos.x-0.5), y: squeeze!*(height)*(pos.y-0.5)))
+
+                    
+                }
             }
+            let curve = SKShapeNode(points: &linepoints, count: linepoints.count)
+            curve.strokeColor = NSColor.black
+            curve.lineWidth = 1
+            curve.zPosition = 4
+            cropNode.addChild(curve)
 
         }
     }

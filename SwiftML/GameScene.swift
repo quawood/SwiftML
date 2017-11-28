@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-
+typealias dataTuple = [(x:Double, y: Double)]
 class GameScene: SKScene {
     
     var entities = [GKEntity]()
@@ -17,25 +17,24 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     
-    
-    func generatePoints(n: Int) -> [(x:Double, y: Double)] {
+    func generatePoints(n: Int) -> dataTuple {
         var points:[(x:Double, y: Double)]! = []
         for _ in 0..<n {
             //pure random
-            let random_x = Double(CGFloat.random(min:0, max: 1))
-            let random_y = Double(CGFloat.random(min:0, max: 1))
+            let random_x = Double(CGFloat.random(min:0, max: 10))
+            let random_y = Double(CGFloat.random(min:0, max: 10))
+//
             
             
-            
-            //non-even circular distribution
+//            non-even circular distribution
 //            let r = Double(CGFloat.random(min:0, max: 1))
             
             //even circular distribution
 //            let r = sqrt(Double(CGFloat.random(min:0, max: 1)))
 //            
 //            let angle = Double(CGFloat.random(min: 0, max: CGFloat(2*Double.pi)))
-//            let random_x = r*cos(angle)
-//            let random_y = r*sin(angle)
+//            let random_x = cos(angle)
+//            let random_y = sin(angle)
             points.append((x: random_x, y: random_y))
         }
         return points
@@ -45,28 +44,36 @@ class GameScene: SKScene {
         var testplots:[Plot]! = []
         
         //create test data
-        let testdata1:[(x:Double, y: Double)]! = generatePoints(n:6)
-        let testdata2:[(x:Double, y: Double)]! = generatePoints(n:900)
-        let testdata3:[(x:Double, y: Double)]! = generatePoints(n:900)
-        
+        let testdata1:dataTuple! = generatePoints(n:100)
+//        let testdata2:dataTuple! = generatePoints(n:900)
+//        let testdata3:dataTuple! = generatePoints(n:900)
+
         //create test plots from test data
-        let testplot1 = Plot(data: testdata1, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "o")
+        let testplot1 = Plot(data: testdata1, label_color: SKColor(calibratedRed: 0.2863, green: 0.902, blue: 0.9569, alpha: 1.0), label_marker: "+")
         testplot1.series_name = "blue"
         
-        let testplot2 = Plot(data: testdata2, label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
-        testplot2.series_name = "yellow"
-        let testplot3 = Plot(data: testdata3, label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
-        testplot3.series_name = "magenta"
-        
+//        let testplot2 = Plot(data: testdata2, label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
+//        testplot2.series_name = "yellow"
+//        let testplot3 = Plot(data: testdata3, label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "+")
+//        testplot3.series_name = "magenta"
+//        
         testplots.append(testplot1)
 //        testplots.append(testplot2)
 //        testplots.append(testplot3)
 
+        var xpairs: dataTuple! = []
+        var ypairs: dataTuple! = []
+        for i in 0..<testdata1.count {
+            xpairs.append((x:Double(i), y: testdata1[i].x))
+            ypairs.append((x:Double(i), y: testdata1[i].y))
+        }
 
+        let para_regression = createRegression(dataSets: [xpairs, ypairs], degrees: [10,11])
+        testplots.append(para_regression)
         //create regressions for test plots
-        let regression = createRegression(data: testdata1, degree: 4)
-        testplots.append(regression)
-//
+//        let regression = createRegression(data: testdata1, degree: 1)
+//        testplots.append(regression)
+////
 //        let regression2 = createRegression(data: testdata2, degree: 2, color: SKColor(calibratedRed: 0.949-0.7, green: 0.7804-0.7, blue: 0, alpha: 1.0))
 //        testplots.append(regression2)
 //
@@ -85,25 +92,34 @@ class GameScene: SKScene {
         
     }
     
-    func createRegression(data: [(x:Double, y: Double)], degree: Int, color: SKColor? = nil) -> Plot {
-        let M = Matrix(data)
-        let xColumn = M.transpose().array[0]
-        let yColumn = M.transpose().array[1]
-        let X = mapFeatures(X:Matrix([xColumn]).transpose() , degree: degree)
-        let y = Matrix([yColumn]).transpose()
-        
-        //gradient descent
-        //let finaltheta = gradientDescent(X: X, y: y, initial_theta: Matrix.zeros(size: (degree+1,1)), learningRate: 0.0001, max_iterations: 100000)
-        
-        //normal equation
-        let finaltheta = normalEquation(X: X, y: y)
-        let hypothesis:predictF! = hypothesis(x:theta:)
-        let lineplot = Plot(function: hypothesis, theta:finaltheta, line_color: SKColor.black)
-        if let color = color {
-            lineplot.label_color = color
+    func createRegression(dataSets: [dataTuple], degrees: [Int], color: SKColor? = nil) -> Plot {
+        var thetaSet: [Matrix] = []
+        var count = 0
+
+        for dataSet in dataSets {
+            let M = Matrix(dataSet)
+            let xColumn = M.transpose().array[0]
+            let yColumn = M.transpose().array[1]
+            let X = mapFeatures(X:Matrix([xColumn]).transpose() , degree: degrees[count])
+            let y = Matrix([yColumn]).transpose()
+            
+            //gradient descent
+            //let finaltheta = gradientDescent(X: X, y: y, initial_theta: Matrix.zeros(size: (degree+1,1)), learningRate: 0.0001, max_iterations: 100000)
+            
+            //normal equation
+            let finaltheta = normalEquation(X: X, y: y)
+            
+            thetaSet.append(finaltheta)
+            count = count + 1
         }
+            let hypothesis:predictF! = hypothesis(x:theta:)
+            let lineplot = Plot(functions: hypothesis, thetaSet: thetaSet, line_color: SKColor.black)
+            if let color = color {
+                lineplot.label_color = color
+            }
+            return lineplot
         
-        return lineplot
+
     }
     
     override func update(_ currentTime: TimeInterval) {
