@@ -7,7 +7,8 @@ Current capabilities:
 
 ![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/samples/sample1.png)
 ![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/samples/sample2.png)
-![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/samples/sample3.png)
+![alt text](https://github.com/quawood/SwiftML/blob/master/SwiftML/samples/sample 3.png)
+
 Challenges:
 * Difficult to increase degree past 5 without needing to wait significant time for graph
 * current learning rate set to 0.001 and iterations set to 100000, time to create regression to significant
