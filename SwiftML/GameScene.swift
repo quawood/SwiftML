@@ -19,30 +19,43 @@ class GameScene: SKScene {
     
     func generatePoints(n: Int) -> dataTuple {
         var points:[(x:Double, y: Double)]! = []
-        for _ in 0..<(n/2) {
+        for _ in 0..<(n/4) {
             //pure random
-            let random_x = Double(CGFloat.random(min:0, max: 1))
-            let random_y = Double(CGFloat.random(min:0, max: 1))
+            let random_x = Double(CGFloat.random(min:0, max: 2))
+            let random_y = Double(CGFloat.random(min:0, max: 2))
             points.append((x: random_x, y: random_y))
         }
-        for _ in 0..<(n/2) {
+        for _ in 0..<(n/4) {
             //pure random
-            let random_x = Double(CGFloat.random(min:3, max: 4))
-            let random_y = Double(CGFloat.random(min:3, max: 4))
+            let random_x = Double(CGFloat.random(min:0, max: 2))
+            let random_y = Double(CGFloat.random(min:2.5, max: 4.5))
             points.append((x: random_x, y: random_y))
         }
+        for _ in 0..<(n/4) {
+            //pure random
+            let random_x = Double(CGFloat.random(min:2.5, max: 4.5))
+            let random_y = Double(CGFloat.random(min:0, max: 2))
+            points.append((x: random_x, y: random_y))
+        }
+        for _ in 0..<(n/4) {
+            //pure random
+            let random_x = Double(CGFloat.random(min:2.5, max: 4.5))
+            let random_y = Double(CGFloat.random(min:2.5, max: 4.5))
+            points.append((x: random_x, y: random_y))
+        }
+
         return points
     }
 
     override func didMove(to view: SKView) {
         var testplots:[Plot]! = []
-        var testdata1:dataTuple! = generatePoints(n: 30)
+        var testdata1:dataTuple! = generatePoints(n: 100)
         let testplot1 = Plot(data: testdata1, label_color: SKColor(calibratedRed: 0.949, green: 0.7804, blue: 0.2824, alpha: 1.0), label_marker: "+")
         testplots.append(testplot1)
         
         
-        let centroids = k_means(n: 2, data: Matrix(testdata1), max_iter: 10000).0
-        var testdata2:dataTuple! = [(x: centroids[0][0], y: centroids[0][1]), (x: centroids[1][0], y: centroids[1][1])]
+        let centroids = k_means(n: 4, data: Matrix(testdata1), max_iter: 10000).0
+        var testdata2:dataTuple! = [(x: centroids[0][0], y: centroids[0][1]), (x: centroids[1][0], y: centroids[1][1]),(x: centroids[2][0], y: centroids[2][1]),(x: centroids[3][0], y: centroids[3][1])]
         let testplot2 = Plot(data: testdata2, label_color: SKColor(calibratedRed: 0.8863, green: 0.4706, blue: 0.6078, alpha: 1.0), label_marker: "o")
         testplots.append(testplot2)
         

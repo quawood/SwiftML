@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A55234212012165A0049E6A3 /* sample 3.png in Resources */ = {isa = PBXBuildFile; fileRef = A55234202012165A0049E6A3 /* sample 3.png */; };
 		A584DB361FCBFA2E0053784F /* sample1.png in Resources */ = {isa = PBXBuildFile; fileRef = A584DB351FCBFA2E0053784F /* sample1.png */; };
 		A584DB381FCBFA370053784F /* sample2.png in Resources */ = {isa = PBXBuildFile; fileRef = A584DB371FCBFA370053784F /* sample2.png */; };
 		A584DB3A1FD3E65A0053784F /* K_Means.swift in Sources */ = {isa = PBXBuildFile; fileRef = A584DB391FD3E65A0053784F /* K_Means.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A55234202012165A0049E6A3 /* sample 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample 3.png"; sourceTree = "<group>"; };
 		A584DB351FCBFA2E0053784F /* sample1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample1.png; sourceTree = "<group>"; };
 		A584DB371FCBFA370053784F /* sample2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample2.png; sourceTree = "<group>"; };
 		A584DB391FD3E65A0053784F /* K_Means.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K_Means.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		A584DB341FCBFA250053784F /* samples */ = {
 			isa = PBXGroup;
 			children = (
+				A55234202012165A0049E6A3 /* sample 3.png */,
 				A584DB371FCBFA370053784F /* sample2.png */,
 				A584DB351FCBFA2E0053784F /* sample1.png */,
 			);
@@ -293,6 +296,7 @@
 				A584DB381FCBFA370053784F /* sample2.png in Resources */,
 				A5E3554C1FC906AA003950E4 /* Actions.sks in Resources */,
 				A584DB361FCBFA2E0053784F /* sample1.png in Resources */,
+				A55234212012165A0049E6A3 /* sample 3.png in Resources */,
 				A5E355551FC906AA003950E4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
