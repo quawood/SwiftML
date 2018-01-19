@@ -155,24 +155,13 @@ class Graph: SKNode {
                     cropNode.addChild(marker)
                     
                 }
-            } else if plot.isLine && !plot.isParametric{
-                linepoints = []
+            } else if plot.isLine{
                 let x_step = x_dif/100
-                for i in 0...9 {
+                for i in 0...100 {
                     let x = domain.lowerBound + Double(i)*x_step
-                    let y = plot.line_function!(x, plot.coeff!)
+                    let y = hypothesis(x: x, theta: plot.coeff!)
                     let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
                     linepoints.append(CGPoint(x: squeeze!*(width)*(pos.x-0.5), y: squeeze!*(height)*(pos.y-0.5)))
-                }
-            } else if plot.isParametric {
-                for i in 0...400{
-                    let t = Double(i) * (9/400)
-                    let x = hypothesis(x: t, theta: (plot.para_coeff?[0])!)
-                    let y = hypothesis(x: t, theta: (plot.para_coeff?[1])!)
-                    let pos = CGPoint(x: (x-domain.lowerBound)/x_dif, y: (y-range.lowerBound)/y_dif)
-                    linepoints.append(CGPoint(x: squeeze!*(width)*(pos.x-0.5), y: squeeze!*(height)*(pos.y-0.5)))
-
-                    
                 }
             }
             let curve = SKShapeNode(points: &linepoints, count: linepoints.count)
